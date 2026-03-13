@@ -3,12 +3,15 @@ const { createClient } = require('@supabase/supabase-js');
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
-async function uploadEarnings(data) {
+// UPDATE STARTS HERE
+async function uploadEarnings(inputData) { 
     try {
-        console.log(`🚀 Received ${data.length} rows. Syncing with Supabase...`);
-        const { error } = await supabase
+        // We use inputData to refer to the sales coming from hardone.js
+        console.log(`🚀 Received ${inputData.length} rows. Syncing with Supabase...`);
+        
+        const { data, error } = await supabase
             .from('earnings')
-            .upsert(data, { onConflict: 'source,sales_date' });
+            .upsert(inputData, { onConflict: 'unique' }); // Uses the 'unique' column you added
 
         if (error) {
             console.error("❌ Database Error:", error.message);
@@ -19,6 +22,6 @@ async function uploadEarnings(data) {
         console.error("💥 Connection Error:", err.message);
     }
 }
+// UPDATE ENDS HERE
 
-// Export the function so hardone.js can use it
 module.exports = { uploadEarnings };
