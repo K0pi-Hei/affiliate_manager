@@ -33,4 +33,4 @@ Most basic scripts are like glass—they look okay until they hit a tiny pebble 
 * **Patience:** 100%
 
 ---
-*Created by [Flowerboy08](https://github.com/Flowerboy08) — because manual data entry is for the birds.*
+*Created by [K0pi-Hei](https://github.com/K0pi-Hei) — because coffee is king.*
